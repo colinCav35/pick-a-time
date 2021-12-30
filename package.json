@@ -1,0 +1,18 @@
+{
+  "name": "pick-a-time",
+  "version": "0.1.0",
+  "description": "A simple Node.js app for finding a mutually free time",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/colinCav35/pick-a-time"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Colin Canaugh",
+  "license": "MIT"
+}
