@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
     "url": "https://github.com/colinCav35/pick-a-time/issues"
   },
   "homepage": "https://github.com/colinCav35/pick-a-time#readme",
-  "dependencies": {},
+  "dependencies": {
+    "jest": "^27.4.5"
+  },
   "devDependencies": {}
 }
