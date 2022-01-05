@@ -4,4 +4,4 @@ COPY server.js /server.js
 
 RUN npm install -g redis@4.0.1
 
-CMD node /server.js
+CMD [ "node", "/server.js" ]
