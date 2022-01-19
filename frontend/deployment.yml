@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: frontend
+  name: frontend
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: frontend
+  template:
+    metadata:
+      labels:
+        run: frontend
+    spec:
+      containers:  
+      - image: colinCav35/pick-a-time-server:latest
+        imagePullPolicy: Always
+        name: frontend
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - name: passwd-volume
+          readOnly: true
+          mountPath: "/etc/redis-passwd"
+        resources:
+          requests:
+            cpu: "1.0"
+            memory: "1G"
+          limits:
+            cpu: "1.0"
+            memory: "1G"
+        env:
+        - name: MAX_SCHEDULES
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: maxSchedules
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      volumes:
+        - name: passwd-volume
+          secret:
+            secretName: redis-passwd
