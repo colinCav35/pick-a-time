@@ -1,19 +1,21 @@
+# API
 ## User
 
 ### Create
 #### PUT `/user/`
 Parameters:
-```
-email:      Email address of the user
-firstName:  First name of the user
-lastName:   Last name of the user
+```javascript
+"email":    "Email address of the user"
+"firstName":  "First name of the user"
+"lastName":   "Last name of the user"
 ```
 
-#### Response:
+Response:
+
 `301 CREATED`
 ```javascript
 {
-    "id": string
+  "id": string
 }
 ```
 
@@ -21,23 +23,23 @@ lastName:   Last name of the user
 ### Update
 #### POST `/user/{id}`
 Parameters:
-```
-email:      Email address of the user
-firstName:  First name of the user
-lastName:   Last name of the user
+```javascript
+"email":    "Email address of the user"
+"firstName":  "First name of the user"
+"lastName":   "Last name of the user"
 ```
 
 
 ### Read
 #### GET `/user/{id}`
 
-#### Response: 
+Response:
+
 `200 OK`
 ```javascript
 {
-    "email": string
-    "firstName": string
-    "lastName": string
+  "email": string
+  "firstName": string
+  "lastName": string
 }
 ```
-
