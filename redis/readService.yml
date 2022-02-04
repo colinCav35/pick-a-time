@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -7,9 +8,9 @@ metadata:
   namespace: default
 spec:
   ports:
-  - port: 6397
-    protocol: TCP
-    targetPort: 6397
+    - port: 6397
+      protocol: TCP
+      targetPort: 6397
   selector:
     app: redis
   sessionAffinity: None

@@ -1,24 +1,24 @@
-import acl from 'acl';
+import { acl as Acl } from 'acl';
 import { readFileSync } from 'fs';
 import { logger } from './logger';
 
-const policy = new acl(new acl.memoryBackend());
+const policy = new Acl(new Acl.memoryBackend());
 
 // Read permissions from combined policies
 try {
-	const policies = JSON.parse(readFileSync('./dist/output/policies.combined.json', 'utf-8'));
-	policy.allow([
-		{
-			allows: policies.Admin,
-			roles: ['Admin']
-		},
-		{
-			allows: policies.User,
-			roles: ['User']
-		}
-	]);
+  const policies = JSON.parse(readFileSync('./dist/output/policies.combined.json', 'utf-8'));
+  policy.allow([
+    {
+      allows: policies.Admin,
+      roles: ['Admin']
+    },
+    {
+      allows: policies.User,
+      roles: ['User']
+    }
+  ]);
 } catch (error) {
-	logger.error(error.message);
+  logger.error(error.message);
 }
 
 export { policy };
