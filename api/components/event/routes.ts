@@ -66,7 +66,7 @@ export class UserRoutes implements IComponentRoutes<UserController> {
       body('time').isString(),
       body('repeating').isString(),
       this.authSerivce.validateRequest,
-      this.controller.updateUser
+      this.controller.updateEvent
     );
 
     this.router.delete(
@@ -75,7 +75,7 @@ export class UserRoutes implements IComponentRoutes<UserController> {
       this.authSerivce.hasPermission(this.name, 'delete'),
       param('eventID').isNumeric(),
       this.authSerivce.validateRequest,
-      this.controller.deleteUser
+      this.controller.deleteEvent
     );
   }
 }
