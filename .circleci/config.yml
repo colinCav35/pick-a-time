@@ -18,10 +18,61 @@ jobs:
       - kubernetes/install
       - azure-cli/install
       - docker/check
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: cimg/node:16.13.2
+    steps:
+      - checkout
+      - run:
+          name: update-npm
+          command: "sudo npm install -g npm@8"
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: install-packages
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Run tests
+          command: npm run test
+      - store_test_results:
+          path: /tmp/test-results
+
+  deploy:
+    working_directory: ~/repo
+    docker:
+      - image: cimg/node:16.13.2
+    steps:
+      - checkout
+      - run:
+          name: Configure Github credentials
+          command: |
+            git config user.email $GITHUB_EMAIL
+            git config user.name $GITHUB_USERNAME
+      - add_ssh_keys:
+          fingerprints:
+            - $GITHUB_FINGERPRINT
+      - run:
+          name: Build Image on Azure Container Registry Task
+          command: npm run pushtobuild
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
+  build:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build # only deploy once build job has completed
+          filters:
+            branches:
+              only: main # only deploy on the main branch
   lib-install:
     jobs:
       - lib-install
