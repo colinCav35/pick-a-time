@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint api --ext .ts",
     "lint:fix": "npm run lint -- --fix",
+    "pushtobuild": "npx gh-pages -b buildimage --message '[skip ci] Updates' -d ./",
     "start": "node index.js",
     "test": "jest"
   },
@@ -52,6 +53,7 @@
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.2.0"
+    "eslint-plugin-promise": "^5.2.0",
+    "gh-pages": "^3.2.3"
   }
 }
