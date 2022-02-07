@@ -39,6 +39,8 @@ jobs:
       - run:
           name: Run tests
           command: npm run test
+      - store_test_results:
+          path: /tmp/test-results
 
   deploy:
     working_directory: ~/repo
